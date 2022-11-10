@@ -1,7 +1,6 @@
 package org.gdsc.booklib.service.impl;
 
 import org.gdsc.booklib.entities.Books;
-import org.gdsc.booklib.entities.Users;
 import org.gdsc.booklib.repository.BookRepository;
 import org.gdsc.booklib.service.BookService;
 import org.springframework.stereotype.Service;
@@ -20,22 +19,29 @@ public class BookServiceImpl implements BookService {
 
 
     @Override
-    public List<Users> getAllBooks() {
-        return null;
+    public List<Books> getAllBooks() {
+        return bookRepository.findAll();
     }
 
     @Override
-    public Users addBook(Books book) {
-        return null;
+    public Books addBook(Books book) {
+        return bookRepository.save(book);
     }
 
     @Override
-    public Users deleteBook(String bookTittle) {
-        return null;
+    public Books deleteBook(String bookTittle) {
+        Books books = bookRepository.findBooksByBookTittle(bookTittle).orElseThrow();
+        bookRepository.delete(books);
+        return books;
     }
 
     @Override
-    public Users updateBook(Books newBook, String bookTittle) {
-        return null;
+    public Books updateBook(Books newBook, String bookTittle) {
+        Books books = bookRepository.findBooksByBookTittle(bookTittle).orElseThrow();
+        books.setBookTittle(newBook.getBookTittle());
+        books.setAuthor(newBook.getAuthor());
+        books.setIsbn(newBook.getIsbn());
+        books.setPrice(newBook.getPrice());
+        return books;
     }
 }
