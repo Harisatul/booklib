@@ -16,7 +16,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 				title = "GDSC Book Lib API", version = "1.0.0",
 				description = "Simple Book lib API with Spring REST. provide basic CRUD Operation for Book and user API"),
 		servers = {@Server(url = "http://localhost:8080/", description = "Development"),
-				@Server(url = "https://booklib-production.up.railway.app/swagger-ui/index.html", description = "Production")},
+				@Server(url = "https://booklib-production.up.railway.app/", description = "Production")},
 		tags = {
 				@Tag(name = "User", description = "This is the simple CRUD operation for User entities."),
 				@Tag(name = "Books", description = "This is the simple CRUD operation for Book entities."),
