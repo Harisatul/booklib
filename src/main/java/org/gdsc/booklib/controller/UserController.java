@@ -37,7 +37,7 @@ public class UserController {
                     content = @Content(schema = @Schema(implementation = UserDTO.class))),
             responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
                     content = @Content(
-                            schema = @Schema(implementation = Users.class, type = "String"),mediaType = MediaType.APPLICATION_JSON_VALUE),
+                            schema = @Schema(implementation = ApiResponse.class, type = "String"),mediaType = MediaType.APPLICATION_JSON_VALUE),
                     description = "Success Response."),
             }
 
@@ -55,7 +55,7 @@ public class UserController {
             description = "to fetch all user data",
             responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
                     content = @Content(
-                            schema = @Schema(implementation = Users.class),mediaType = MediaType.APPLICATION_JSON_VALUE),
+                            schema = @Schema(implementation = ApiResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE),
                     description = "Success Response."),
             }
 
@@ -75,7 +75,7 @@ public class UserController {
             description = "to delete user data",
             parameters = {
                     @Parameter(name = "username", description = "this is username. should be found", required = false,
-                            example = "andrew",schema = @Schema(type = "String"))},
+                            example = "andrew",schema = @Schema(type = "string"))},
             responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
                     content = @Content(
                             schema = @Schema(implementation = ApiResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE),
@@ -96,13 +96,13 @@ public class UserController {
             summary = "update user data",
             description = "to update user data. username required as path of endpoint",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "This is the request body for update User request.",
-                    content = @Content(schema = @Schema(implementation = Users.class))),
+                    content = @Content(schema = @Schema(implementation = UserDTO.class))),
             parameters = {
                     @Parameter(name = "username", description = "this is username. should be unique",
                             example = "andrew",schema = @Schema(type = "string"), required = false)},
             responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
                     content = @Content(
-                            schema = @Schema(implementation = Users.class, type = "String"),mediaType = MediaType.APPLICATION_JSON_VALUE),
+                            schema = @Schema(implementation = ApiResponse.class, type = "String"),mediaType = MediaType.APPLICATION_JSON_VALUE),
                     description = "Success Response."),
             }
 
