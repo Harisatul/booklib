@@ -1,10 +1,10 @@
-# CINEMA - REST API
+# BOOKLIB - REST API
 
 A Book Lib REST API builded by spring-boot
 
 ## Authors
 
-- Harisatul Aulia [@haris.aulia404](https://gitlab.com/haris.aulia404)
+- Harisatul Aulia [@haris.aulia404](https://github.com/Harisatul/booklib)
 
 
 ## Deployment
