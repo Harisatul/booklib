@@ -33,8 +33,8 @@ public class UserController {
             operationId = "addUser",
             summary = "add user data",
             description = "to add user data.",
-            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "This is the request body for update User request.",
-                    content = @Content(schema = @Schema(implementation = Users.class))),
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "This is the request body for add User request.",
+                    content = @Content(schema = @Schema(implementation = UserDTO.class))),
             responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
                     content = @Content(
                             schema = @Schema(implementation = Users.class, type = "String"),mediaType = MediaType.APPLICATION_JSON_VALUE),
