@@ -80,7 +80,7 @@ public class BookController {
             description = "to delete book data",
             parameters = {
                     @Parameter(name = "booktittle", description = "this is book tittle.",
-                            example = "Filosofi teras",schema = @Schema(type = "String"))},
+                            example = "Filosofi teras",schema = @Schema(type = "String"), required = false)},
             responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
                     content = @Content(
                             schema = @Schema(implementation = ApiResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE),
@@ -105,7 +105,7 @@ public class BookController {
                     content = @Content(schema = @Schema(implementation = Users.class))),
             parameters = {
                     @Parameter(name = "booktittle", description = "this is booktittle.",
-                            example = "Filosofi Teras",schema = @Schema(type = "String"))},
+                            example = "Filosofi Teras",schema = @Schema(type = "String"), required = false)},
             responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
                     content = @Content(
                             schema = @Schema(implementation = BookDTO.class, type = "String"),mediaType = MediaType.APPLICATION_JSON_VALUE),

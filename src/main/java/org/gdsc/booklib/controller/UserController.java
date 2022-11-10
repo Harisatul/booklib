@@ -74,7 +74,7 @@ public class UserController {
             summary = "delete user by Username",
             description = "to delete user data",
             parameters = {
-                    @Parameter(name = "username", description = "this is username. should be found",
+                    @Parameter(name = "username", description = "this is username. should be found", required = false,
                             example = "andrew",schema = @Schema(type = "String"))},
             responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
                     content = @Content(
@@ -99,7 +99,7 @@ public class UserController {
                     content = @Content(schema = @Schema(implementation = Users.class))),
             parameters = {
                     @Parameter(name = "username", description = "this is username. should be unique",
-                            example = "andrew",schema = @Schema(type = "String"))},
+                            example = "andrew",schema = @Schema(type = "String"), required = false)},
             responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
                     content = @Content(
                             schema = @Schema(implementation = Users.class, type = "String"),mediaType = MediaType.APPLICATION_JSON_VALUE),
