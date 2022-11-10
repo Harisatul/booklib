@@ -13,8 +13,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableJpaAuditing
 @OpenAPIDefinition(
 		info = @Info(contact =  @Contact(name = "Harisatul Aulia", email = "haris.auia404@gmail.com"),
-				title = "User API", version = "1.0.0",
-				description = "Simple User API with Spring REST. provide basic CRUD Operation for User API"),
+				title = "Book Lib API", version = "1.0.0",
+				description = "Simple Book lib API with Spring REST. provide basic CRUD Operation for Book and user API"),
 		servers = {@Server(url = "http://localhost:8080/cinema/api/v1", description = "Development"),
 				@Server(url = "https://harisatulauliacinemaapp.up.railway.app/cinema/api/v1", description = "Production")},
 		tags = {
