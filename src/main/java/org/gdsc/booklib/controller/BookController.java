@@ -1,10 +1,16 @@
 package org.gdsc.booklib.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import org.gdsc.booklib.dto.BookDTO;
 import org.gdsc.booklib.dto.UserDTO;
 import org.gdsc.booklib.entities.Books;
 import org.gdsc.booklib.entities.Users;
 import org.gdsc.booklib.payload.ApiResponse;
 import org.gdsc.booklib.service.BookService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,8 +30,22 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping("/addbook")
-    public ResponseEntity<ApiResponse> addBook(@RequestBody Books book){
+    @Operation(
+            tags = {"Books"},
+            operationId = "addBook",
+            summary = "add book data",
+            description = "to add book data.",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "This is the request body for added Book data request.",
+                    content = @Content(schema = @Schema(implementation = BookDTO.class))),
+            responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
+                    content = @Content(
+                            schema = @Schema(implementation = BookDTO.class, type = "String"),mediaType = MediaType.APPLICATION_JSON_VALUE),
+                    description = "Success Response."),
+            }
+
+    )
+    @PostMapping("/addbook")
+    public ResponseEntity<ApiResponse> addBook(@RequestBody BookDTO book){
         Books books = bookService.addBook(book);
         ApiResponse apiResponse = new ApiResponse(
                 TRUE,
@@ -35,12 +55,39 @@ public class BookController {
     }
 
     @GetMapping("/getallbooks")
+    @Operation(
+            tags = {"Books"},
+            operationId = "getAllBook",
+            summary = "get all book data",
+            description = "to fetch all books data",
+            responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
+                    content = @Content(
+                            schema = @Schema(implementation = ApiResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE),
+                    description = "Success Response."),
+            }
+
+    )
     public ResponseEntity<ApiResponse> getAllBooks(){
         List<Books> allBooks = bookService.getAllBooks();
         ApiResponse apiResponse = new ApiResponse(TRUE, "successfully fetch books data ", allBooks);
         return new ResponseEntity<>(apiResponse, OK);
     }
 
+    @Operation(
+            tags = {"Books"},
+            operationId = "deleteBook",
+            summary = "delete book data by book Tittle",
+            description = "to delete book data",
+            parameters = {
+                    @Parameter(name = "booktittle", description = "this is book tittle.",
+                            example = "Filosofi teras",schema = @Schema(type = "String"))},
+            responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
+                    content = @Content(
+                            schema = @Schema(implementation = ApiResponse.class),mediaType = MediaType.APPLICATION_JSON_VALUE),
+                    description = "Success Response."),
+            }
+
+    )
     @DeleteMapping("/deletebook/{booktittle}")
     public ResponseEntity<ApiResponse> deleteBook(@PathVariable(name = "booktittle") String bookTittle){
         Books books = bookService.deleteBook(bookTittle);
@@ -49,7 +96,24 @@ public class BookController {
     }
 
     @PostMapping("/updatebook/{booktittle}")
-    public ResponseEntity<ApiResponse> updateUser(@RequestBody Books books, @PathVariable(name = "booktittle") String bookTittle){
+    @Operation(
+            tags = {"Books"},
+            operationId = "updateBook",
+            summary = "update book data",
+            description = "to update book data. booktittle required as path of endpoint",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "This is the request body for update Book data request.",
+                    content = @Content(schema = @Schema(implementation = Users.class))),
+            parameters = {
+                    @Parameter(name = "booktittle", description = "this is booktittle.",
+                            example = "Filosofi Teras",schema = @Schema(type = "String"))},
+            responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200",
+                    content = @Content(
+                            schema = @Schema(implementation = BookDTO.class, type = "String"),mediaType = MediaType.APPLICATION_JSON_VALUE),
+                    description = "Success Response."),
+            }
+
+    )
+    public ResponseEntity<ApiResponse> updateUser(@RequestBody BookDTO books, @PathVariable(name = "booktittle") String bookTittle){
         Books updateBooks = bookService.updateBook(books, bookTittle);
         ApiResponse apiResponse = new ApiResponse(TRUE, "successfully updated book data with book tittle " + bookTittle, updateBooks);
         return new ResponseEntity<>(apiResponse, OK);
