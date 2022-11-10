@@ -1,5 +1,6 @@
 package org.gdsc.booklib.service.impl;
 
+import org.gdsc.booklib.dto.BookDTO;
 import org.gdsc.booklib.entities.Books;
 import org.gdsc.booklib.repository.BookRepository;
 import org.gdsc.booklib.service.BookService;
@@ -24,8 +25,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Books addBook(Books book) {
-        return bookRepository.save(book);
+    public Books addBook(BookDTO book) {
+        Books books = new Books();
+        books.setBookTittle(book.getBookTittle());
+        books.setAuthor(book.getAuthor());
+        books.setPrice(book.getPrice());
+        books.setIsbn(book.getIsbn());
+        return bookRepository.save(books);
     }
 
     @Override
@@ -36,7 +42,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Books updateBook(Books newBook, String bookTittle) {
+    public Books updateBook(BookDTO newBook, String bookTittle) {
         Books books = bookRepository.findBooksByBookTittle(bookTittle).orElseThrow();
         books.setBookTittle(newBook.getBookTittle());
         books.setAuthor(newBook.getAuthor());
